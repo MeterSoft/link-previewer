@@ -23,8 +23,7 @@ defmodule LinkPreviewer do
   """
   @spec preview(String.t()) :: {:ok, Preview.t()} | {:error, Error.t()}
   def preview(link) do
-    with :ok <- validate_link(link),
-         {:ok, response} <- request(link),
+    with {:ok, response} <- request(link),
          {:ok, processor} <- get_processor(response) do
       preview =
         @parsers_processors_mapping
